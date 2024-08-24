@@ -2,7 +2,7 @@ import "dotenv/config.js";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import usersRoutes from "./routes/users.routes.js";
+import petsRoutes from "./routes/pets.routes.js";
 import { dbConnection } from "./config/db.js";
 
 //import { dbConnectionFiless } from "../config/db";
@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser());
 
-app.use("/users", usersRoutes);
+app.use("/pets", petsRoutes);
 
 try {
   dbConnection.authenticate();

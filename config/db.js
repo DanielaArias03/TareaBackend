@@ -10,6 +10,5 @@ export const dbConnection = new Sequelize(
         dialect: "mariadb",
         dialectOptions: {
             connectTimeout: 60000 // Incrementa el timeout a 60 segundos
-        },
-    }
+    }}
 );

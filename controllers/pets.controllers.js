@@ -1,59 +1,59 @@
-import Users from "../models/users.js";
+import Pets from "../models/pets.js";
 
 // Controlador para obtener todos los usuarios
-export const GetAllUsers = async (req, res) => {
-  const users = await Users.findAll();
+export const GetAll = async (req, res) => {
+  const pets = await Pets.findAll();
 
-  res.json(users);
+  res.json(pets);
 };
 
 // Controlador para obtener los usuarios por ID
-export const GetUserById = async (req, res) => {
-  const user = await Users.findOne({
+export const GetById = async (req, res) => {
+  const pets = await Pets.findOne({
     where: { id: +req.params.id },
   });
 
-  res.json(user);
+  res.json(pets);
 };
 
 // Controlador para crear un usuario
-export const postUser = async (req, res) => {
+export const createNew = async (req, res) => {
   const userToCreate = req.body;
 
-  await Users.create(userToCreate);
+  await Pets.create(userToCreate);
 
   res.status(201).json(userToCreate);
 };
 
 // Controlador para actualizar un usuario
 export const UpdateById = async (req, res) => {
-  await Users.update(req.body, {
+  await Pets.update(req.body, {
     where: {
       id: +req.params.id,
     },
   });
 
-  const userUpdated = await Users.findOne({
+  const petUpdated = await Pets.findOne({
     where: {
       id: +req.params.id,
     },
   });
 
-  res.json(userUpdated);
+  res.json(petUpdated);
 };
 
 // Controlador para eliminar un usuario por ID
 export const DeleteById = async (req, res) => {
-  const userToDelete = await Users.findOne({
+  const petToDelete = await Pets.findOne({
     where: {
       id: +req.params.id,
     },
   });
 
-  await Users.destroy({
+  await Pets.destroy({
     where: {
       id: +req.params.id,
     },
   });
-  res.json(userToDelete);
+  res.json(petToDelete);
 };

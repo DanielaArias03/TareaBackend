@@ -1,25 +1,20 @@
 import { DataTypes } from "sequelize";
 import { dbConnection } from "../config/db.js";
 
-const Users = dbConnection.define("users", {
-  username: {
+const Pets = dbConnection.define("pets", {
+  namepet: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  mail: {
+  ownerpet: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-    },
   },
-  password: {
+  cedpet: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-Users.sync();
-export default Users;
-
+Pets.sync();
+export default Pets;
