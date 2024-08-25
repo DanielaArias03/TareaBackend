@@ -1,11 +1,11 @@
 const checkById = (req, res, next) => {
-    if (Number.isNaN(Number.parseInt(req.params.id))) {
-        res.status(400).json({ message: "Invalid id param" });
+  if (Number.isNaN(Number.parseInt(req.params.id))) {
+    res.status(400).json({ message: "Invalid id param" });
 
-        return;
-    }
+    return;
+  }
 
-    next();
+  next();
 };
 
 export default checkById;
