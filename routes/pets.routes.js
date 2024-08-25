@@ -4,12 +4,14 @@ import {
   GetAll,
   GetById,
   UpdateById,
+  auth,
   createNew,
 } from "../controllers/pets.controllers.js";
 import checkById from "../Middlewares/users/checkId.js";
 import petExists from "../Middlewares/users/petExist.js";
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 import validateDataMiddleware from "../Middlewares/validation/ValidateData.middleware.js";
+import authorizatePet from "../Middlewares/users/authorizatePet.js";
 
 const petsRoutes = Router();
 
@@ -35,9 +37,12 @@ petsRoutes.post(
 );
 
 // Ruta para modificar un usuario por ID
+petsRoutes.post("/auth", auth);
+
+// Ruta para modificar un usuario por ID
 petsRoutes.patch("/:id", [checkById, petExists], UpdateById);
 
 // Ruta para eliminar un usuario por ID
-petsRoutes.delete("/:id", [checkById, petExists], DeleteById);
+petsRoutes.delete("/:id", [checkById, petExists, authorizatePet], DeleteById);
 
 export default petsRoutes;

@@ -13,6 +13,7 @@ const Pets = dbConnection.define("pets", {
   cedpet: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique:true
   },
 });
 
