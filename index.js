@@ -4,6 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import petsRoutes from "./routes/pets.routes.js";
 import { dbConnection } from "./config/db.js";
+import RateLimit from "./Middlewares/rateLimit/rateLimit.middleware.js";
 
 //import { dbConnectionFiless } from "../config/db";
 
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser());
+app.use(RateLimit);
 
 app.use("/pets", petsRoutes);
 
