@@ -5,8 +5,7 @@ import bodyParser from "body-parser";
 import petsRoutes from "./routes/pets.routes.js";
 import { dbConnection } from "./config/db.js";
 import RateLimit from "./Middlewares/rateLimit/rateLimit.middleware.js";
-
-//import { dbConnectionFiless } from "../config/db";
+import ownersRoutes from "./routes/owners.routes.js";
 
 const app = express();
 // app.get("/", (req, res) => {
@@ -18,6 +17,7 @@ app.use(bodyParser());
 app.use(RateLimit);
 
 app.use("/pets", petsRoutes);
+app.use("/owners", ownersRoutes);
 
 try {
   dbConnection.authenticate();

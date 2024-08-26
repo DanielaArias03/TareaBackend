@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import Pets from "../../models/pets.js";
 
-const authorizatePet = async (req, res, next) => {
+const authorizateOwner = async (req, res, next) => {
   const token = req.headers.authorization.split("Bearer ")[1];
 
   try {
@@ -23,4 +23,4 @@ const authorizatePet = async (req, res, next) => {
   }
 };
 
-export default authorizatePet;
+export default authorizateOwner;

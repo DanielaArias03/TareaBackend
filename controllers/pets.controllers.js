@@ -2,7 +2,7 @@ import redis from "../config/redis.js";
 import Pets from "../models/pets.js";
 import jwt from "jsonwebtoken";
 
-// Controlador para obtener todos los usuarios
+// Controlador para obtener todos los pets
 export const GetAll = async (req, res) => {
   const petsKey = "pets";
 
@@ -17,7 +17,7 @@ export const GetAll = async (req, res) => {
   res.json(pets);
 };
 
-// Controlador para obtener los usuarios por ID
+// Controlador para obtener los pets por ID
 export const GetById = async (req, res) => {
   const pets = await Pets.findOne({
     where: { id: +req.params.id },
@@ -26,7 +26,7 @@ export const GetById = async (req, res) => {
   res.json(pets);
 };
 
-// Controlador para crear un usuario
+// Controlador para crear un pets
 export const createNew = async (req, res) => {
   const userToCreate = req.body;
 
@@ -35,7 +35,7 @@ export const createNew = async (req, res) => {
   res.status(201).json(userToCreate);
 };
 
-// Controlador para actualizar un usuario
+// Controlador para actualizar un pet
 export const UpdateById = async (req, res) => {
   await Pets.update(req.body, {
     where: {
@@ -52,7 +52,7 @@ export const UpdateById = async (req, res) => {
   res.json(petUpdated);
 };
 
-// Controlador para eliminar un usuario por ID
+// Controlador para eliminar un pet por ID
 export const DeleteById = async (req, res) => {
   const petToDelete = await Pets.findOne({
     where: {
@@ -66,26 +66,4 @@ export const DeleteById = async (req, res) => {
     },
   });
   res.json(petToDelete);
-};
-
-// Controlador para autorización
-export const auth = async (req, res) => {
-  const { namepet, cedpet } = req.body;
-
-  const pets = await Pets.findOne({
-    where: {
-      namepet: namepet,
-      cedpet: cedpet,
-    },
-  });
-
-  if (!pets) {
-    return res.status(401).json({ message: "Invalid credentials" });
-  }
-
-  const token = jwt.sign({ petId: pets.id }, "TareaBackend", {
-    expiresIn: 60 * 60,
-  });
-
-  res.json({ token: token });
 };
